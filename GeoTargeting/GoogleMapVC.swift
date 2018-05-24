@@ -23,7 +23,7 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         
         // setup locationManager
         locationManager.delegate = self;
-        locationManager.distanceFilter = 5.0
+        locationManager.distanceFilter = 10.0
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
         
@@ -54,28 +54,32 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
             showAlert("Location services were previously denied. Please enable location services for this app in Settings.")
         }
             // we do have authorization
-        else if CLLocationManager.authorizationStatus() == .authorizedAlways {
-            locationManager.startUpdatingLocation()
+        else if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            
         }
+        DispatchQueue.main.async {
+            
+        }
+        self.locationManager.startUpdatingLocation()
     }
     
     func setupData() {
         // check if can monitor regions
         if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             
-            var bounds = GMSCoordinateBounds()
-            for dict in arrayLocations {
-                let latitude = Double((dict as AnyObject).value(forKey: "latitude") as! String)
-                let longitude = Double((dict as AnyObject).value(forKey: "longitude") as! String)
-                self.addMoteringPlace(title: (dict as AnyObject).value(forKey: "title") as! String, latitude: latitude!, longitude: longitude!)
-                bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!))
-            }
+//            var bounds = GMSCoordinateBounds()
+//            for dict in arrayLocations {
+//                let latitude = Double((dict as AnyObject).value(forKey: "latitude") as! String)
+//                let longitude = Double((dict as AnyObject).value(forKey: "longitude") as! String)
+//                self.addMoteringPlace(title: (dict as AnyObject).value(forKey: "title") as! String, latitude: latitude!, longitude: longitude!)
+//                bounds = bounds.includingCoordinate(CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!))
+//            }
+//
+//            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
             
-            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
-            
-//            self.addMoteringPlace(title: "Satadhar", latitude: 23.06620000, longitude: 72.53260000)
-//            self.addMoteringPlace(title: "Home", latitude: 23.08149700, longitude: 72.53834800)
-//            self.addMoteringPlace(title: "Landmark Honda", latitude: 23.0480852, longitude: 72.5159037)
+            self.addMoteringPlace(title: "Satadhar", latitude: 23.06620000, longitude: 72.53260000)
+            self.addMoteringPlace(title: "Home", latitude: 23.08149700, longitude: 72.53834800)
+            self.addMoteringPlace(title: "Landmark Honda", latitude: 23.0480852, longitude: 72.5159037)
         }
         else {
             print("System can't track regions")
@@ -90,6 +94,8 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         // setup region
         let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude,
                                                                      longitude: coordinate.longitude), radius: regionRadius, identifier: title)
+        region.notifyOnExit = true
+        region.notifyOnEntry = true
         locationManager.startMonitoring(for: region)
         
         let annotation = GMSMarker(position: coordinate)
@@ -117,6 +123,14 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
     }
     
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
         print(error)
     }
     
