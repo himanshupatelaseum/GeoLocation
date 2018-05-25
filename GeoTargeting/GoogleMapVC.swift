@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import GoogleMaps
+import UserNotifications
 
 class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -29,6 +30,7 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         locationManager.distanceFilter = 10.0
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
+        locationManager.allowsBackgroundLocationUpdates = true
         
         // setup mapView
         mapView.delegate = self
@@ -208,10 +210,25 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         
 //        showAlert(string)
         
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = Date()
-        localNotification.alertBody = string
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+//        let localNotification = UILocalNotification()
+//        localNotification.fireDate = Date()
+//        localNotification.alertBody = string
+//        UIApplication.shared.scheduleLocalNotification(localNotification)
+        
+        let content = UNMutableNotificationContent()
+//        content.title = "Welcome to goa Singam"
+        content.body = string
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound.default()
+        
+        let date = Date()
+        var dateComponents = DateComponents()
+        dateComponents = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().add(request)
     }
     
     // MARK: - GMSMapView Delegate
