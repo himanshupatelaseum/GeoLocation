@@ -19,6 +19,7 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
     var monitoredRegions: Dictionary<String, Date> = [:]
     var isInsideLocation = false
     var indexOfLocation = -1
+    let currentLocationMarker = GMSMarker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
+//        currentLocationMarker.icon = #imageLiteral(resourceName: "my_location")
+
         // setup test data
 //        setupData()
     }
@@ -41,6 +44,8 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
     override func viewWillAppear(_ animated: Bool) {
         
         mapView.clear()
+//        currentLocationMarker.map = mapView
+//        currentLocationMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5);
         setupData()
     }
     
@@ -59,10 +64,11 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         else if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             
             self.locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingHeading()
         }
-        DispatchQueue.main.async {
-            
-        }
+//        DispatchQueue.main.async {
+//
+//        }
     }
     
     func setupData() {
@@ -119,11 +125,6 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
     
     // MARK: - CLLocationManagerDelegate
     
-    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print(error)
     }
@@ -146,17 +147,25 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
 //        monitoredRegions.removeValue(forKey: region.identifier)
 //    }
     
-//    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-//        let camera = GMSCameraPosition.camera(withTarget: (locationManager.location?.coordinate)!, zoom: 17.0, bearing: self.mapView.camera.bearing, viewingAngle: 0)
-//        self.mapView?.animate(to: camera)
-//    }
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.mapView.animate(toBearing: newHeading.trueHeading)
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Latitude : \(locations[0].coordinate.latitude) Longitude : \(locations[0].coordinate.longitude)")
         
+        print("Latitude : \(locations[0].coordinate.latitude) Longitude : \(locations[0].coordinate.longitude)")
         let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        self.mapView?.animate(to: camera)
+        
+        currentLocationMarker.position = (location?.coordinate)!
+        
+        if locationManager.heading == nil {
+            let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+            self.mapView?.animate(to: camera)
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!, zoom: 17.0, bearing: (locationManager.heading?.trueHeading)!, viewingAngle: 0)
+            self.mapView?.animate(to: camera)
+        }
         
         let isAlreadyInsideLocation = isInsideLocation
         let previousIndex = indexOfLocation
@@ -194,6 +203,13 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         
         //updateRegionsWithLocation(locations[0])
     }
+    
+    // MARK: - GMSMapView Delegate
+    
+    //    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+    //        let camera = GMSCameraPosition.camera(withLatitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!, zoom: 17.0, bearing: (mapView.myLocation?.horizontalAccuracy)!, viewingAngle: 0)
+    //        self.mapView?.animate(to: camera)
+    //    }
     
     // MARK: - Comples business logic
     

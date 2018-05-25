@@ -131,15 +131,10 @@
                                     <outlet property="delegate" destination="hzX-e2-KaW" id="KZK-Bg-JMe"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27b-ke-WVV">
-                                <rect key="frame" x="303" y="595" width="40" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="Sns-ff-vWp"/>
-                                    <constraint firstAttribute="height" constant="40" id="kqb-Ea-Hsz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="+">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27b-ke-WVV">
+                                <rect key="frame" x="279" y="571" width="64" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="add_location">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -166,4 +161,7 @@
             <point key="canvasLocation" x="1668" y="368.36581709145429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add_location" width="64" height="64"/>
+    </resources>
 </document>
