@@ -11,6 +11,9 @@
 		04BC96B020B68C0D00410FF1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BC96AF20B68C0D00410FF1 /* MapKit.framework */; };
 		04BC96B420B6A00300410FF1 /* GoogleMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC96B320B6A00300410FF1 /* GoogleMapVC.swift */; };
 		04BC96B620B6B53000410FF1 /* AddRemoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC96B520B6B53000410FF1 /* AddRemoveVC.swift */; };
+		04F68F7020B8343F00CD66F4 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F68F6D20B8343F00CD66F4 /* UserNotificationsUI.framework */; };
+		04F68F7120B8343F00CD66F4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F68F6E20B8343F00CD66F4 /* NotificationCenter.framework */; };
+		04F68F7220B8343F00CD66F4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F68F6F20B8343F00CD66F4 /* UserNotifications.framework */; };
 		094D2827C4C0F54078C4B551 /* Pods_GeoTargeting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BDA4D4AE5E9D346C8AD2A0 /* Pods_GeoTargeting.framework */; };
 		5207D8C31CCE69B0007DF1E8 /* Satadhar.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 5207D8C21CCE69B0007DF1E8 /* Satadhar.gpx */; };
 		5207D8C51CCEB879007DF1E8 /* RegionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5207D8C41CCEB879007DF1E8 /* RegionProtocol.swift */; };
@@ -29,6 +32,10 @@
 		04BC96B220B699D200410FF1 /* Landmark.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Landmark.gpx; sourceTree = "<group>"; };
 		04BC96B320B6A00300410FF1 /* GoogleMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapVC.swift; sourceTree = "<group>"; };
 		04BC96B520B6B53000410FF1 /* AddRemoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveVC.swift; sourceTree = "<group>"; };
+		04F68F6D20B8343F00CD66F4 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		04F68F6E20B8343F00CD66F4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		04F68F6F20B8343F00CD66F4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		04F68F7320B8367200CD66F4 /* GeoTargeting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GeoTargeting.entitlements; sourceTree = "<group>"; };
 		2CE9D75028E74BE677A4806C /* Pods-GeoTargeting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoTargeting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GeoTargeting/Pods-GeoTargeting.debug.xcconfig"; sourceTree = "<group>"; };
 		5207D8C21CCE69B0007DF1E8 /* Satadhar.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Satadhar.gpx; sourceTree = "<group>"; };
 		5207D8C41CCEB879007DF1E8 /* RegionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionProtocol.swift; sourceTree = "<group>"; };
@@ -49,6 +56,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F68F7020B8343F00CD66F4 /* UserNotificationsUI.framework in Frameworks */,
+				04F68F7120B8343F00CD66F4 /* NotificationCenter.framework in Frameworks */,
+				04F68F7220B8343F00CD66F4 /* UserNotifications.framework in Frameworks */,
 				04BC96B020B68C0D00410FF1 /* MapKit.framework in Frameworks */,
 				04BC96AE20B68C0200410FF1 /* CoreLocation.framework in Frameworks */,
 				094D2827C4C0F54078C4B551 /* Pods_GeoTargeting.framework in Frameworks */,
@@ -61,6 +71,9 @@
 		04BC96AC20B68C0200410FF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04F68F6E20B8343F00CD66F4 /* NotificationCenter.framework */,
+				04F68F6F20B8343F00CD66F4 /* UserNotifications.framework */,
+				04F68F6D20B8343F00CD66F4 /* UserNotificationsUI.framework */,
 				04BC96AF20B68C0D00410FF1 /* MapKit.framework */,
 				04BC96AD20B68C0200410FF1 /* CoreLocation.framework */,
 				98BDA4D4AE5E9D346C8AD2A0 /* Pods_GeoTargeting.framework */,
@@ -89,6 +102,7 @@
 		525EF2E71CCB473000373B01 /* GeoTargeting */ = {
 			isa = PBXGroup;
 			children = (
+				04F68F7320B8367200CD66F4 /* GeoTargeting.entitlements */,
 				525EF2E81CCB473000373B01 /* AppDelegate.swift */,
 				525EF2EA1CCB473000373B01 /* ViewController.swift */,
 				04BC96B320B6A00300410FF1 /* GoogleMapVC.swift */,
@@ -154,6 +168,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
 							};
 						};
 					};
@@ -307,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -346,7 +363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -360,6 +377,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 262A95NSKE;
 				INFOPLIST_FILE = GeoTargeting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ugin.GeoTargeting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -374,6 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 262A95NSKE;
 				INFOPLIST_FILE = GeoTargeting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ugin.GeoTargeting;
 				PRODUCT_NAME = "$(TARGET_NAME)";

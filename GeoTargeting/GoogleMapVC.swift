@@ -187,21 +187,31 @@ class GoogleMapVC: UIViewController, GMSMapViewDelegate, CLLocationManagerDelega
         if isAlreadyInsideLocation && isInsideLocation && previousIndex != indexOfLocation {
             let dictPrev = arrayLocations[previousIndex] as! NSDictionary
             let dict = arrayLocations[indexOfLocation] as! NSDictionary
-            showAlert("Exit : \(dictPrev.value(forKey: "title") as! String)\nEnter : \(dict.value(forKey: "title") as! String)")
+            self.fireNotification(string: "Exit : \(dictPrev.value(forKey: "title") as! String)\nEnter : \(dict.value(forKey: "title") as! String)")
         }
         else if !isAlreadyInsideLocation && isInsideLocation {
             let dict = arrayLocations[indexOfLocation] as! NSDictionary
-            showAlert("Enter : \(dict.value(forKey: "title") as! String)")
+            self.fireNotification(string: "Enter : \(dict.value(forKey: "title") as! String)")
         }
         else if isAlreadyInsideLocation && !isInsideLocation {
             let dict = arrayLocations[indexOfLocation] as! NSDictionary
-            showAlert("Exit : \(dict.value(forKey: "title") as! String)")
+            self.fireNotification(string: "Exit : \(dict.value(forKey: "title") as! String)")
         }
         else {
             
         }
         
         //updateRegionsWithLocation(locations[0])
+    }
+    
+    func fireNotification(string: String) {
+        
+//        showAlert(string)
+        
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = Date()
+        localNotification.alertBody = string
+        UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
     // MARK: - GMSMapView Delegate
